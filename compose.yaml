@@ -5,7 +5,7 @@ networks:
   opensearch-net:
 services:
   opensearch-node1:
-    image: docker.io/opensearchproject/opensearch:latest 
+    image: docker.io/opensearchproject/opensearch:latest
     container_name: opensearch-node1
     environment:
       - cluster.name=opensearch-cluster
@@ -41,7 +41,7 @@ services:
     ports:
       - 5601:5601
     networks:
-      opensearch-net
+      - opensearch-net
   cerebro:
     image: docker.io/lmenezes/cerebro:latest
     container_name: cerebro
@@ -49,4 +49,15 @@ services:
     ports:
       - 9000:9000
     networks:
-      opensearch-net
+      - opensearch-net
+  logstash:
+    image: docker.io/opensearchproject/logstash-oss-with-opensearch-output-plugin:latest
+    container_name: logstash
+    volumes:
+      - /home/opc/searchcluster/config/logstash:/usr/share/logstash/pipeline/:Z
+    ports:
+      - 5044:5044
+    environment:
+      LS_JAVA_OPTS: "-Xmx1g -Xms1g"
+    networks:
+      - opensearch-net
