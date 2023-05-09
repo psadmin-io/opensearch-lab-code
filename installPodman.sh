@@ -12,7 +12,7 @@ function echoerror() {
   printf "${RC} ✖  ERROR${EC}: %s\n${EC}" "$@" 1>&2;
 }
 
-echoinfo "Install and configure for rootless podman"
+echoinfo "Install and configure rootless podman"
 sudo dnf install podman podman-plugins 1>/dev/null 
 sudo podman system info --runtime=crun 1>/dev/null 
 
@@ -40,9 +40,12 @@ echoinfo "Enable linger for opc user processes"
 sudo loginctl enable-linger "$(whoami)"
 sleep 2
 
-echoinfo "Configure profile for podman socket and aliases"
+echoinfo "Configure profile for podman socket"
 echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" | tee -a $HOME/.bash_profile 1>/dev/null
 echo "export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock" | tee -a $HOME/.bash_profile 1>/dev/null
+sleep 2
+
+echoinfo "Configure profile for podman aliases"
 echo "alias podman=\"sudo /usr/bin/podman\"" | tee -a $HOME/.bash_profile 1>/dev/null
 echo "alias docker=\"sudo /usr/bin/podman\"" | tee -a $HOME/.bash_profile 1>/dev/null
 source $HOME/.bash_profile 1>/dev/null
