@@ -13,7 +13,7 @@ function echoerror() {
 }
 
 echoinfo "Install Podman-Compose"
-sudo pip3 install podman-compose 1>/dev/null 
+sudo pip3 install podman-compose > /dev/null 2>&1
 sleep 2
 
 echoinfo "Configure profile for Podman-Compose aliases"
