@@ -54,7 +54,7 @@ systemctl --user start podman.socket
 sleep 5
 
 echoinfo "Test if podman is running \n"
-status=$(curl -H "Content-Type: application/json" --unix-socket /run/user/$UID/podman/podman.sock http://localhost/_ping)
+status=$(curl -s -H "Content-Type: application/json" --unix-socket /run/user/$UID/podman/podman.sock http://localhost/_ping)
 case $status in
   'OK' )
     echoinfo "Podman is running"
