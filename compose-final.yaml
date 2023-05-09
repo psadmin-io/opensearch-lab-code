@@ -54,7 +54,7 @@ services:
     image: docker.io/opensearchproject/logstash-oss-with-opensearch-output-plugin:latest
     container_name: logstash
     volumes:
-      - /home/opc/searchcluster/config/logstash:/usr/share/logstash/pipeline/:Z
+      - /home/opc/lab/ps-logstash/logstash:/usr/share/logstash/pipeline/:Z
     ports:
       - 5044:5044
     environment:
