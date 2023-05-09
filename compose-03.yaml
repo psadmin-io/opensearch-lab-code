@@ -33,3 +33,20 @@ services:
       - opensearch-data2:/usr/share/opensearch/data:Z
     networks:
       - opensearch-net
+  opensearch-dashboards:
+    image: docker.io/opensearchproject/opensearch-dashboards:latest
+    container_name: opensearch-dashboards
+    environment:
+      OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]'
+    ports:
+      - 5601:5601
+    networks:
+      - opensearch-net
+  cerebro:
+    image: docker.io/lmenezes/cerebro:latest
+    container_name: cerebro
+    command: -Dplay.ws.ssl.loose.acceptAnyCertificate=true
+    ports:
+      - 9000:9000
+    networks:
+      - opensearch-net
