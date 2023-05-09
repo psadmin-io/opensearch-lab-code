@@ -23,35 +23,35 @@ driver    = "overlay"
 [storage.options.overlay]
 mount_program = "/usr/bin/fuse-overlayfs"
 EOF
-sleep 5
+sleep 2
 
 echoinfo "Update OS Params for Opensearch"
 echo "user.max_user_namespaces=28633" | sudo tee -a /etc/sysctl.d/userns.conf 1>/dev/null
 sudo sysctl -p /etc/sysctl.d/userns.conf 1>/dev/null
 echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf 1>/dev/null
 sudo sysctl -p /etc/sysctl.conf 1>/dev/null
-sleep 5
+sleep 2
 
 echoinfo "Add docker.io to Registry"
 echo 'unqualified-search-registries = ["docker.io"]' | sudo tee -a /etc/containers/registries.conf 1>/dev/null
-sleep 5 
+sleep 2
 
 echoinfo "Enable linger for opc user processes"
-sudo loginctl enable-linger $(whoami)
-sleep 5
+sudo loginctl enable-linger "$(whoami)"
+sleep 2
 
 echoinfo "Configure profile for podman socket and aliases"
-echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" >> $HOME/.bash_profile
-echo "export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock" >> $HOME/.bash_profile
-echo "alias podman=\"sudo /usr/bin/podman\"" >> $HOME/.bash_profile
-echo "alias docker=\"sudo /usr/bin/podman\"" >> $HOME/.bash_profile
+echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" | tee -a $HOME/.bash_profile
+echo "export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock" | tee -a $HOME/.bash_profile
+echo "alias podman=\"sudo /usr/bin/podman\"" | tee -a $HOME/.bash_profile
+echo "alias docker=\"sudo /usr/bin/podman\"" | tee -a $HOME/.bash_profile
 source $HOME/.bash_profile 1>/dev/null
-sleep 5
+sleep 2
 
 echoinfo "Start podman"
 systemctl --user enable podman.socket
 systemctl --user start podman.socket
-sleep 5
+sleep 2
 
 echoinfo "Test if podman is running"
 status=$(curl -s -H "Content-Type: application/json" --unix-socket /run/user/$UID/podman/podman.sock http://localhost/_ping)
