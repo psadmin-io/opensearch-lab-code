@@ -1,0 +1,18 @@
+volumes:
+  opensearch-data1:
+networks:
+  opensearch-net:
+services:
+  opensearch-node1:
+    image: docker.io/opensearchproject/opensearch:latest
+    container_name: opensearch-node1
+    environment:
+      - discovery.type=single-node
+      - 'OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g'
+    volumes:
+      - opensearch-data1:/usr/share/opensearch/data
+    ports:
+      - 9200:9200
+      - 9600:9600
+    networks:
+      - opensearch-net

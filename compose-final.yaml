@@ -1,0 +1,63 @@
+volumes:
+  opensearch-data1:
+  opensearch-data2:
+networks:
+  opensearch-net:
+services:
+  opensearch-node1:
+    image: docker.io/opensearchproject/opensearch:latest
+    container_name: opensearch-node1
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node1
+      - discovery.seed_hosts=opensearch-node1,opensearch-node2
+      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
+      - 'OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g'
+    volumes:
+      - opensearch-data1:/usr/share/opensearch/data
+    ports:
+      - 9200:9200
+      - 9600:9600
+    networks:
+      - opensearch-net
+  opensearch-node2:
+    image: docker.io/opensearchproject/opensearch:latest
+    container_name: opensearch-node2
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node2
+      - discovery.seed_hosts=opensearch-node1,opensearch-node2
+      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
+      - 'OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g'
+    volumes:
+      - opensearch-data2:/usr/share/opensearch/data
+    networks:
+      - opensearch-net
+  opensearch-dashboards:
+    image: docker.io/opensearchproject/opensearch-dashboards:latest
+    container_name: opensearch-dashboards
+    environment:
+      OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]'
+    ports:
+      - 5601:5601
+    networks:
+      - opensearch-net
+  cerebro:
+    image: docker.io/lmenezes/cerebro:latest
+    container_name: cerebro
+    command: -Dplay.ws.ssl.loose.acceptAnyCertificate=true
+    ports:
+      - 9000:9000
+    networks:
+      - opensearch-net
+  logstash:
+    image: docker.io/opensearchproject/logstash-oss-with-opensearch-output-plugin:latest
+    container_name: logstash
+    volumes:
+      - /home/opc/searchcluster/config/logstash:/usr/share/logstash/pipeline/:Z
+    ports:
+      - 5044:5044
+    environment:
+      LS_JAVA_OPTS: "-Xmx1g -Xms1g"
+    networks:
+      - opensearch-net
