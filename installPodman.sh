@@ -13,11 +13,11 @@ function echoerror() {
 }
 
 echoinfo "Install and configure for rootless podman"
-sudo dnf install podman podman-plugins cr
-sudo podman system info --runtime=crun
+sudo dnf install podman podman-plugins cr 1>/dev/null 
+sudo podman system info --runtime=crun 1>/dev/null 
 
 mkdir -p $HOME/.config/containers/
-tee $HOME/.config/containers/storage.conf << EOF
+tee $HOME/.config/containers/storage.conf 1>/dev/null << EOF
 [storage]
 driver    = "overlay"
 [storage.options.overlay]
@@ -26,14 +26,14 @@ EOF
 sleep 5
 
 echoinfo "Update OS Params for Opensearch"
-echo "user.max_user_namespaces=28633" | sudo tee -a /etc/sysctl.d/userns.conf
-sudo sysctl -p /etc/sysctl.d/userns.conf
-echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
-sudo sysctl -p /etc/sysctl.conf
+echo "user.max_user_namespaces=28633" | sudo tee -a /etc/sysctl.d/userns.conf 1>/dev/null
+sudo sysctl -p /etc/sysctl.d/userns.conf 1>/dev/null
+echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf 1>/dev/null
+sudo sysctl -p /etc/sysctl.conf 1>/dev/null
 sleep 5
 
 echoinfo "Add docker.io to Registry"
-echo 'unqualified-search-registries = ["docker.io"]' | sudo tee -a /etc/containers/registries.conf
+echo 'unqualified-search-registries = ["docker.io"]' | sudo tee -a /etc/containers/registries.conf 1>/dev/null
 sleep 5 
 
 echoinfo "Enable linger for opc user processes"
@@ -45,7 +45,7 @@ echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" >> $HOME/.bash_profile
 echo "export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock" >> $HOME/.bash_profile
 echo "alias podman=\"sudo /usr/bin/podman\"" >> $HOME/.bash_profile
 echo "alias docker=\"sudo /usr/bin/podman\"" >> $HOME/.bash_profile
-source $HOME/.bash_profile
+source $HOME/.bash_profile 1>/dev/null
 sleep 5
 
 echoinfo "Start podman"
@@ -53,7 +53,7 @@ systemctl --user enable podman.socket
 systemctl --user start podman.socket
 sleep 5
 
-echoinfo "Test if podman is running \n"
+echoinfo "Test if podman is running"
 status=$(curl -s -H "Content-Type: application/json" --unix-socket /run/user/$UID/podman/podman.sock http://localhost/_ping)
 case $status in
   'OK' )
