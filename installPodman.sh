@@ -41,10 +41,10 @@ sudo loginctl enable-linger "$(whoami)"
 sleep 2
 
 echoinfo "Configure profile for podman socket and aliases"
-echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" | tee -a $HOME/.bash_profile
-echo "export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock" | tee -a $HOME/.bash_profile
-echo "alias podman=\"sudo /usr/bin/podman\"" | tee -a $HOME/.bash_profile
-echo "alias docker=\"sudo /usr/bin/podman\"" | tee -a $HOME/.bash_profile
+echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" | tee -a $HOME/.bash_profile 1>/dev/null
+echo "export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock" | tee -a $HOME/.bash_profile 1>/dev/null
+echo "alias podman=\"sudo /usr/bin/podman\"" | tee -a $HOME/.bash_profile 1>/dev/null
+echo "alias docker=\"sudo /usr/bin/podman\"" | tee -a $HOME/.bash_profile 1>/dev/null
 source $HOME/.bash_profile 1>/dev/null
 sleep 2
 
