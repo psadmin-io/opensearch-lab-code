@@ -22,14 +22,14 @@ sudo sysctl -p /etc/sysctl.conf
 echo 'unqualified-search-registries = ["docker.io"]' | sudo tee -a /etc/containers/registries.conf
 
 # Enable linger for opc user processes
-sudo loginctl enable-linger opc
+sudo loginctl enable-linger $(whoami)
 
 # Configure profile for podman socket and aliases
-echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" >> /home/opc/.bash_profile
-echo "export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock" >> /home/opc/.bash_profile
-echo "alias podman=\"sudo /usr/bin/podman\"" >> /home/opc/.bash_profile
-echo "alias docker=\"sudo /usr/bin/podman\"" >> /home/opc/.bash_profile
-source ~/.bash_profile
+echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" >> $HOME/.bash_profile
+echo "export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock" >> $HOME/.bash_profile
+echo "alias podman=\"sudo /usr/bin/podman\"" >> $HOME/.bash_profile
+echo "alias docker=\"sudo /usr/bin/podman\"" >> $HOME/.bash_profile
+source $HOME/.bash_profile
 
 # Start podman
 systemctl --user enable podman.socket
