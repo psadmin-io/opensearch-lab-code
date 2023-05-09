@@ -10,7 +10,7 @@ services:
       - discovery.type=single-node
       - 'OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g'
     volumes:
-      - opensearch-data1:/usr/share/opensearch/data
+      - opensearch-data1:/usr/share/opensearch/data:Z
     ports:
       - 9200:9200
       - 9600:9600
