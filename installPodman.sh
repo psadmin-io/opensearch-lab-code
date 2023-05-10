@@ -13,7 +13,9 @@ function echoerror() {
 }
 
 echoinfo "Install and configure rootless podman"
-sudo dnf install -y podman podman-plugins 1>/dev/null 
+sudo dnf module enable -y container-tools:ol8 1>/dev/null
+sudo dnf module install -y container-tools:ol8 1>/dev/null
+sudo dnf install -y podman-docker 1>/dev/null 
 sudo podman system info --runtime=crun 1>/dev/null 
 
 mkdir -p $HOME/.config/containers/
@@ -52,7 +54,7 @@ source $HOME/.bash_profile 1>/dev/null
 sleep 2
 
 echoinfo "Start podman"
-systemctl --user enable podman.socket
+systemctl --user enable podman.socket 1>/dev/null
 systemctl --user start podman.socket
 sleep 2
 
