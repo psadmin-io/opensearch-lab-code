@@ -54,8 +54,8 @@ source $HOME/.bash_profile 1>/dev/null
 sleep 2
 
 echoinfo "Start podman"
-systemctl --user enable podman.socket 1>/dev/null
-systemctl --user start podman.socket 1>/dev/null
+systemctl --user enable podman.socket > /dev/null 2>&1
+systemctl --user start podman.socket > /dev/null 2>&1
 sleep 2
 
 echoinfo "Test if podman is running"
