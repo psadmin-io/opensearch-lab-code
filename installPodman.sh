@@ -55,7 +55,7 @@ sleep 2
 
 echoinfo "Start podman"
 systemctl --user enable podman.socket 1>/dev/null
-systemctl --user start podman.socket
+systemctl --user start podman.socket 1>/dev/null
 sleep 2
 
 echoinfo "Test if podman is running"
