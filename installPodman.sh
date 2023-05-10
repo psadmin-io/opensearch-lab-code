@@ -15,7 +15,7 @@ function echoerror() {
 echoinfo "Install and configure rootless podman"
 sudo dnf module enable -y container-tools:ol8 1>/dev/null
 sudo dnf module install -y container-tools:ol8 1>/dev/null
-sudo dnf install -y podman-docker 1>/dev/null 
+sudo dnf install -y podman-docker podman-plugins 1>/dev/null 
 sudo podman system info --runtime=crun 1>/dev/null 
 
 mkdir -p $HOME/.config/containers/
