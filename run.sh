@@ -9,7 +9,7 @@ set -e
 
 # PeopleSoft Plugin Credentials
 export ESADMIN_USER=${ESADMIN_USER:-esadmin}
-export ESADMIN_PASSWORD=${ESADMIN_PASSWORD:-esadmin}
+export ESADMIN_PASSWORD=${ESADMIN_PASSWORD:-'Passw0rd#'}
 export PEOPLE_USER=${PEOPLE_USER:-people}
 export PEOPLE_PASSWORD=${PEOPLE_PASSWORD:-people}
 
