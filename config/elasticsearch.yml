@@ -10,8 +10,8 @@ cluster:
 #
 node:
   name: ${NODE_NAME}
-  master: ${NODE_MASTER}
-  data: ${NODE_DATA}
+  # master: ${NODE_MASTER}
+  # data: ${NODE_DATA}
 
 #
 # ------------------------------------ Path ------------------------------------
@@ -23,18 +23,19 @@ path:
 #
 # ----------------------------------- Memory -----------------------------------
 #
-bootstrap:
-  mlockall: true
+# bootstrap:
+#   mlockall: true
 
 #
 # ---------------------------------- Network -----------------------------------
 #
-network.host: ${NETWORK_HOST}
+network:
+  host: ${NETWORK_HOST}
 
 http:
   type: OrclNetty4HttpServerTransport
   port: ${HTTP_PORT}
-  enabled: ${HTTP_ENABLE}
+  # enabled: ${HTTP_ENABLE}
   compression: true
   max_content_length: 512mb
   cors:
