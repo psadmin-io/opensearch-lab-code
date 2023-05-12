@@ -116,7 +116,7 @@ WORKDIR /elasticsearch
 COPY --chown=1000:1000 config /elasticsearch/config
 
 # Copy the script to start the Elasticsearch instance
-COPY run.sh /
+COPY --chown=1000:1000 run.sh /
 
 # By default, run the Elasticsearch startup script
 CMD ["/bin/bash", "-c", "/run.sh"]
