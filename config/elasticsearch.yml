@@ -19,8 +19,6 @@ node:
 path:
   data: /data/data
   logs: /data/log
-  plugins: /elasticsearch/plugins
-  work: /data/work
 
 #
 # ----------------------------------- Memory -----------------------------------
@@ -38,6 +36,7 @@ http:
   port: ${HTTP_PORT}
   enabled: ${HTTP_ENABLE}
   compression: true
+  max_content_length: 512mb
   cors:
     enabled: ${HTTP_CORS_ENABLE}
     allow-origin: ${HTTP_CORS_ALLOW_ORIGIN}
@@ -54,46 +53,19 @@ discovery:
 # When the PeopleSoft callback url is https, install the Peoplesoft Root CA
 # certificate in Elasticsearch truststore.
 #
-orclssl:
+ orclssl:
   http:
     ssl: false
-  transport:
+   transport:
     ssl: false
-  # keystore:
-  # keystore_password:
-  # truststore:
-  # truststore_password:
   callback: ${CALLBACK_SSL}
-
-#
-# ------------------------------------- ACL ------------------------------------
-#
-acl:
-  cache:
-    delete:
-      interval: 24h
-      bulk_size: 10000
-
-#
-#------------------------------ Mapper Attachments------------------------------
-# -1 indicates that there is no limit in the number of characters extracted
-# from the attachment
-#
-# index:
-#   mapping:
-#     attachment:
-#       indexed_chars: -1
-
-#
-#------------------------------ Web Crawler -------------------------------------
-#
-# orcl:
-#   proxy:
-#     host:
-#     port:
 
 #
 #--------------------------------Transport-------------------------------------
 #
 transport:
   type: OrclNetty4Transport
+
+# Misc
+orcl.kibana.sessionTimeOut: 86400000
+script.painless.regex.enabled: true
