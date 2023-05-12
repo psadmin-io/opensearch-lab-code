@@ -4,15 +4,15 @@ networks:
   ps-elasticsearch:
 services:
   elasticsearch-node1:
-    image: docker.io/opensearchproject/opensearch:latest
-    container_name: opensearch-node1
+    image: localhost/ps-elasticsearch
+    container_name: elasticsearch
     environment:
       - 'CLUSTER_NAME=demo'
       - 'NODE_NAME=ps-elasticsearch'
       - discovery.type=single-node
       # - INITIAL_MASTER_NODES=elasticsearch-node1
       # - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
-      - 'OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g'
+      - 'ELASTICSEARCH_JAVA_OPTS=-Xms1g -Xmx1g'
     volumes:
       - ps-elasticsearch1:/data:Z
     ports:

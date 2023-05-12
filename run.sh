@@ -24,9 +24,9 @@ export NODE_MASTER=${NODE_MASTER:-true}
 export NODE_DATA=${NODE_DATA:-true}
 export NAMESPACE=${NAMESPACE:-default}
 export CALLBACK_SSL=${CALLBACK_SSL:-false}
+export INITIAL_MASTER_NODES="[${INITIAL_MASTER_NODES:-'127.0.0.1'}]"
 
 # Cloud Plugin Settings & Credentials
-export INITIAL_MASTER_NODES="[${INITIAL_MASTER_NODES:-'127.0.0.1'}]"
 # export DISCOVERY_SERVICE=${DISCOVERY_SERVICE:-pselasticsearch-discovery}
 # export NUMBER_OF_MASTERS=${NUMBER_OF_MASTERS:-1}
 # export AZURE_STORAGE_ACCOUNT=${AZURE_STORAGE_ACCOUNT:-""}
