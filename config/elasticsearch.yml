@@ -53,10 +53,10 @@ discovery:
 # When the PeopleSoft callback url is https, install the Peoplesoft Root CA
 # certificate in Elasticsearch truststore.
 #
- orclssl:
+orclssl:
   http:
     ssl: false
-   transport:
+  transport:
     ssl: false
   callback: ${CALLBACK_SSL}
 
