@@ -107,8 +107,7 @@ RUN set -ex \
     && chown -R elasticsearch:elasticsearch /elasticsearch \
     && chown -R elasticsearch:elasticsearch /data \
     && chmod +x /elasticsearch/bin/elasticsearch \
-    && chmod +x /elasticsearch/bin/elasticsearchuser \
-    && chmod +x /elasticsearch/bin/plugin
+    && chmod +x /elasticsearch/bin/elasticsearchuser 
 
 # Set the current working directory
 WORKDIR /elasticsearch
