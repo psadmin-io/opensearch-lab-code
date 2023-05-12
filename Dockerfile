@@ -62,6 +62,8 @@ RUN set -ex \
     # && unzip /tmp/jce_policy-${JAVA_VERSION_MAJOR}.zip \
     # && cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /opt/jre/lib/security/ \
     # && sed -i 's/#networkaddress.cache.ttl=-1/networkaddress.cache.ttl=10/' ${JAVA_HOME}/lib/security/java.security \
+    && sed '43 i     permission java.lang.RuntimePermission "accessDeclaredMembers";' ${JAVA_HOME}/conf/security/java.policy \
+    && sed '44 i     permission java.lang.RuntimePermission "getClassLoader";' ${JAVA_HOME}/conf/security/java.policy \
     && rm -rf /opt/jre/plugin \
            /opt/jre/bin/javaws \
            /opt/jre/bin/jjs \
@@ -107,7 +109,8 @@ RUN set -ex \
     && chown -R elasticsearch:elasticsearch /elasticsearch \
     && chown -R elasticsearch:elasticsearch /data \
     && chmod +x /elasticsearch/bin/elasticsearch \
-    && chmod +x /elasticsearch/bin/elasticsearchuser 
+    && chmod +x /elasticsearch/bin/elasticsearchuser \
+    && chmod +x /elasticsearch/plugins
 
 # Set the current working directory
 WORKDIR /elasticsearch
