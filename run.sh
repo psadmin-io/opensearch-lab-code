@@ -62,8 +62,8 @@ function enable_memlock() {
 
 function add_elasticsearch_users() {
   echoinfo "Adding Elasticsearch users"
-  sudo -E -u elasticsearch /elasticsearch/bin/elasticsearchuser addusersilent "${ESADMIN_USER}" "${ESADMIN_PASSWORD}" admin,read,security
-  sudo -E -u elasticsearch /elasticsearch/bin/elasticsearchuser addusersilent "${PEOPLE_USER}" "${PEOPLE_PASSWORD}" read
+  /elasticsearch/bin/elasticsearchuser addusersilent "${ESADMIN_USER}" "${ESADMIN_PASSWORD}" admin,read,security
+  /elasticsearch/bin/elasticsearchuser addusersilent "${PEOPLE_USER}" "${PEOPLE_PASSWORD}" read
 }
 
 function update_permissions() {
@@ -73,7 +73,7 @@ function update_permissions() {
 
 function start_elasticsearch() {
   echoinfo "Starting Elasticsearch"
-  sudo -E -u elasticsearch /elasticsearch/bin/elasticsearch
+  /elasticsearch/bin/elasticsearch
 }
 
 ##########
