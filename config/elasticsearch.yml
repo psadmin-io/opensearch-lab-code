@@ -3,7 +3,7 @@
 #
 cluster:
   name: ${CLUSTER_NAME}
-  initial_master_nodes: ${INITIAL_MASTER_NODES}
+  # initial_master_nodes: ${INITIAL_MASTER_NODES}
 
 #
 # ------------------------------------ Node ------------------------------------
