@@ -4,7 +4,7 @@ networks:
   ps-elasticsearch:
 services:
   elasticsearch-node1:
-    image: localhost/ps-elasticsearch
+    image: localhost/ps-elasticsearch:latest
     container_name: elasticsearch
     environment:
       - 'CLUSTER_NAME=demo'
