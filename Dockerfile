@@ -22,7 +22,7 @@ ENV ES_VERSION="7.10.0" \
 
 # Set derived environment variables
 ENV ES_ARCHIVE_FILE="pt-elasticsearch-${ES_VERSION}.tgz" \
-    JAVA_ARCHIVE_FILE="pt-jdk${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR}_${JAVA_VERSION_BUILD}.tgz" \
+    JAVA_ARCHIVE_FILE="pt-jdk${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR}.${JAVA_VERSION_BUILD}.tgz" \
     # JCE_ARCHIVE_FILE="jce_policy-${JAVA_VERSION_MAJOR}.zip" \
     PATH="${PATH}:/elasticsearch/bin:/opt/jre/bin"
 
