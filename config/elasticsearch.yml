@@ -79,10 +79,10 @@ acl:
 # -1 indicates that there is no limit in the number of characters extracted
 # from the attachment
 #
-index:
-  mapping:
-    attachment:
-      indexed_chars: -1
+# index:
+#   mapping:
+#     attachment:
+#       indexed_chars: -1
 
 #
 #------------------------------ Web Crawler -------------------------------------
