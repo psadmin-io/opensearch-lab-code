@@ -81,7 +81,7 @@ function start_elasticsearch() {
 ##########
 
 set_node_name
-enable_memlock
+# enable_memlock
 add_elasticsearch_users
 update_permissions
 start_elasticsearch
