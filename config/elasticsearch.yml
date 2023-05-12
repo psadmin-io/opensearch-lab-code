@@ -59,10 +59,10 @@ orclssl:
     ssl: false
   transport:
     ssl: false
-  keystore:
-  keystore_password:
-  truststore:
-  truststore_password:
+  # keystore:
+  # keystore_password:
+  # truststore:
+  # truststore_password:
   callback: ${CALLBACK_SSL}
 
 #
