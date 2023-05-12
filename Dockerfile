@@ -32,10 +32,10 @@ VOLUME ["/data"]
 # Expose the http and node transport ports
 EXPOSE 9200 9300
 
-# Install prerequisites, cleanup yum artifacts, and update nsswitch.conf
+# Install prerequisites, cleanup dnf artifacts, and update nsswitch.conf
 RUN set -ex \
-    && yum update -y \
-    && yum install -y \
+    && microdnf update -y \
+    && microdnf install -y \
     sudo \
     ca-certificates \
     sudo \
@@ -46,8 +46,8 @@ RUN set -ex \
     tar \
     util-linux \
     hostname \
-    && yum clean all \
-    && rm -rf /var/cache/yum
+    && rm -Rf /var/cache/yum \
+    && rm -Rf /var/cache/dnf
 
 # Copy and unpack java archive
 ADD ${JAVA_ARCHIVE_FILE} /opt/jre
