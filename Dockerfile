@@ -62,8 +62,8 @@ RUN set -ex \
     # && unzip /tmp/jce_policy-${JAVA_VERSION_MAJOR}.zip \
     # && cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /opt/jre/lib/security/ \
     && sed -i 's/#networkaddress.cache.ttl=-1/networkaddress.cache.ttl=10/' ${JAVA_HOME}/conf/security/java.security \
-    && sed -i '43 i \ \ \ \ permission java.lang.RuntimePermission "accessDeclaredMembers";' ${JAVA_HOME}/conf/security/java.policy \
-    && sed -i '43 i \ \ \ \ permission java.lang.RuntimePermission "getClassLoader";' ${JAVA_HOME}/conf/security/java.policy \
+    && sed -i '44 i \ \ \ \ permission java.lang.RuntimePermission "accessDeclaredMembers";' ${JAVA_HOME}/conf/security/java.policy \
+    && sed -i '44 i \ \ \ \ permission java.lang.RuntimePermission "getClassLoader";' ${JAVA_HOME}/conf/security/java.policy \
     && rm -rf /opt/jre/plugin \
            /opt/jre/bin/javaws \
            /opt/jre/bin/jjs \
